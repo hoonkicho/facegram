@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="message">
+	<insert id="message_insert" parameterType="message" useGeneratedKeys="false">
+		insert into message
+		values(
+		message_seq.nextVal,
+		#{sendIdx},
+		#{sendId},
+		#{receivedId},
+		#{msg}
+		)
+	</insert>
+
+	<select id="message_one" parameterType="message"
+		resultType="message">
+		select * from message where sendIdx = #{sendIdx} and
+		receivedId = #{receivedId}
+	</select>
+
+	<select id="message_list" parameterType="java.lang.String"
+		resultType="message">
+		select * from message where receivedId = #{receivedId}
+	</select>
+
+	<delete id="message_delete" parameterType="int">
+		delete from message
+		where idx=#{idx}
+	</delete>
+
+	<!-- 페이징 -->
+	<select id="message_count" parameterType="java.lang.String"
+		resultType="int">
+		select count(*) from message where receivedId =
+		#{receivedId}
+	</select>
+
+	<select id="message_list_page" parameterType="hashmap"
+		resultType="message">
+		<![CDATA[
+			select rownum as rnum, A.*
+			from ( select rownum as rnum, B.*
+	       			from ( select * from message where receivedId = #{receivedId} order by idx desc ) B   
+	       			where rownum <= #{endNo}
+	      			) A
+			where rnum >= #{startNo}
+		]]>
+	</select>
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+

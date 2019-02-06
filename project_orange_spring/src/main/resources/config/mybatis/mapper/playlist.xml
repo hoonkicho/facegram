@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="playlist">
+	<select id="playlist_one" parameterType="playlist"
+		resultType="playlist">
+		select * from playlist where memberidx = #{memberidx} and
+		musicidx = #{musicidx}
+	</select>
+
+	<insert id="playlist_insert" parameterType="playlist" useGeneratedKeys="false">
+		insert into playlist
+		values( playlist_seq.nextVal, #{memberidx},#{musicidx})
+	</insert>
+
+	<select id="playlist_list" parameterType="int"
+		resultType="playlist">
+		select * from playlist_view where memberidx = #{memberidx}
+	</select>
+
+	<delete id="playlist_delete" parameterType="int">
+		delete from playlist
+		where idx = #{resultidx}
+	</delete>
+
+	<!-- 페이징 -->
+	<select id="myplaylist_count" parameterType="int"
+		resultType="int">
+		select count(*) from playlist_view where memberidx =
+		#{memberidx}
+	</select>
+
+	<select id="myplaylist_list_page" parameterType="hashmap"
+		resultType="playlist">
+		<![CDATA[
+			select rownum as rnum, A.*
+			from ( select rownum as rnum, B.*
+	       			from ( select * from playlist_view where memberidx = #{memberidx} order by idx ) B   
+	       			where rownum <= #{endNo}
+	      			) A
+			where rnum >= #{startNo}
+		]]>
+	</select>
+
+
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

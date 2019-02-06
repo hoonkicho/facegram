@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="myfriend">
+	<select id="myfriend_one" parameterType="myfriend"
+		resultType="myfriend">
+		select * from myfriend where friendid = #{friendid} and
+		myid=#{myid}
+	</select>
+
+	<insert id="myfriend_insert" parameterType="myfriend" useGeneratedKeys="false">
+		insert into myfriend
+		values(
+		myfriend_seq.nextVal,
+		#{myid},
+		#{myname},
+		#{friendname},
+		#{friendid}
+		)
+	</insert>
+
+	<select id="myfriend_list" parameterType="java.lang.String"
+		resultType="myfriend">
+		select * from myfriend where myid = #{myid}
+	</select>
+
+	<delete id="myfriend_delete" parameterType="myfriend"> <!-- 유저1이 유저2에게 친삭하면 유저2의 친구에서 유저1도 삭제 -->
+		delete from myfriend where (myid = #{friendid} and friendid = #{myid})
+		or (myid = #{myid} and friendid = #{friendid})
+	</delete>
+
+	<!-- 페이징 -->
+	<select id="myfriend_count" parameterType="java.lang.String"
+		resultType="int">
+		select count(*) from myfriend where myid = #{myid}
+	</select>
+
+	<select id="myfriend_list_page" parameterType="hashmap"
+		resultType="myfriend">
+		<![CDATA[
+			select rownum as rnum, A.*
+			from ( select rownum as rnum, B.*
+	       			from ( select * from myfriend where myid = #{myid} order by idx desc ) B   
+	       			where rownum <= #{endNo}
+	      			) A
+			where rnum >= #{startNo}
+		]]>
+	</select>
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+

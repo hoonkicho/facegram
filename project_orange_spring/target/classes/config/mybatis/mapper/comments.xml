@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="comments">
+	<insert id="comments_insert" parameterType="comments" useGeneratedKeys="false">
+		insert into comments
+		values(
+		comments_seq.nextVal,
+		#{c_name},
+		#{c_content},
+		sysdate,
+		#{c_goodpoint},
+		#{musicidx},
+		#{memberidx}
+		)
+	</insert>
+	<select id="comments_list_idx" parameterType="int"
+		resultType="comments">
+		select * from comments where musicidx = #{idx} order by
+		c_goodpoint desc
+	</select>
+
+	<update id="comments_update" parameterType="int">
+		update comments
+		set c_goodpoint = c_goodpoint+1 where idx = #{idx}
+	</update>
+
+	<delete id="comments_delete" parameterType="int">
+		delete from comments
+		where idx = #{idx}
+	</delete>
+
+	<!-- 페이징 -->
+	<select id="comments_count" parameterType="int" resultType="int">
+		select count(*) from comments where musicidx = #{memberidx}
+	</select>
+
+	<select id="comments_list_page" parameterType="hashmap"
+		resultType="comments">
+		<![CDATA[
+			select rownum as rnum, A.*
+			from ( select rownum as rnum, B.*
+	       			from ( select * from comments where musicidx = #{memberidx} order by c_goodpoint desc ) B   
+	       			where rownum <= #{endNo}
+	      			) A
+			where rnum >= #{startNo}
+		]]>
+	</select>
+
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+

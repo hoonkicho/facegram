@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="music">
+
+	<!-- 게시물리스트 -->
+	<select id="music_list" parameterType="java.lang.String"
+		resultType="music">
+		select * from music order by m_goodpoint desc
+	</select>
+	
+	<!-- 게시물탐색 -->
+	<select id="music_search" parameterType="java.lang.String"
+		resultType="music">
+		select *
+		from music
+		where
+		m_musicfile like '%'||#{search}||'%' or
+		m_title like '%'||#{search}||'%' or
+		m_content like '%'||#{search}||'%'
+		or m_image like '%'||#{search}||'%'
+	</select>
+
+	<!-- 상세게시물 -->
+	<select id="music_one" parameterType="int" resultType="music">
+		select *
+		from music where idx = #{idx}
+	</select>
+
+	<!-- 게시물삽입 -->
+	<insert id="music_insert" parameterType="music" useGeneratedKeys="false">
+		insert into music
+		values(
+		music_seq.nextVal,
+		#{m_title},
+		#{m_content},
+		#{m_musicfile},
+		#{m_image},
+		sysdate,
+		#{m_goodpoint},
+		#{memberidx},
+		#{name},
+		#{memberid}
+		)
+	</insert>
+
+	<!-- 게시물좋아요 -->
+	<update id="music_update" parameterType="int">
+		update music set
+		m_goodpoint = m_goodpoint+1 where idx = #{idx}
+	</update>
+
+	<!-- 게시물 삭제 -->
+	<delete id="music_delete" parameterType="int">
+		delete from music where
+		idx = #{idx}
+	</delete>
+	
+	<!-- 나의 게시물 -->
+	<select id="mymusic_list" parameterType="int" resultType="music">
+		select * from music where memberidx = #{memberidx}
+	</select>
+
+	<!-- 페이징 -->
+	<select id="music_count" resultType="int">
+		select count(*) from music
+	</select>
+
+
+	<select id="music_list_page" parameterType="hashmap"
+		resultType="music">
+		<![CDATA[
+			select rownum as rnum, A.*
+			from ( select rownum as rnum, B.*
+	       			from ( select * from music order by m_goodpoint desc ) B   
+	       			where rownum <= #{endNo}
+	      			) A
+			where rnum >= #{startNo}
+		]]>
+	</select>
+
+	<select id="mymusic_count" parameterType="int" resultType="int">
+		select count(*) from music where memberidx = #{memberidx}
+	</select>
+
+
+	<select id="mymusic_list_page" parameterType="hashmap"
+		resultType="music">
+		<![CDATA[
+			select rownum as rnum, A.*
+			from ( select rownum as rnum, B.*
+	       			from ( select * from music where memberidx = #{memberidx} order by m_goodpoint desc ) B   
+	       			where rownum <= #{endNo}
+	      			) A
+			where rnum >= #{startNo}
+		]]>
+	</select>
+
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
