@@ -1,0 +1,42 @@
+@charset "UTF-8";
+
+body {
+    margin: 0 auto;
+    font-family: Noto Sans KR;
+    color : dimgrey;
+}
+
+#main {
+	border-bottom: 1px solid palegoldenrod;
+	width: 100%;
+	margin: 5px 0px auto;
+	text-align: center;
+}
+
+#main .facegram {
+	text-decoration: none;
+    text-align: center;
+    font-size: 30px;
+    color: palegoldenrod;
+    margin: 0 auto;
+}
+
+#login {
+    background-color: #fff;
+    border: 1px solid #e6e6e6;
+    border-radius: 1px;
+    margin: 100px 30% 0px;
+    padding: 10px;
+    text-align: center;
+}
+
+#login dd {
+	margin: 0 auto;
+}
+
+#login input {
+    height: 20px;
+    border:none;
+    background-color: #e2e2e2;
+    font-family: Noto Sans KR;
+}

@@ -1,0 +1,75 @@
+@charset "UTF-8";
+
+#profile {
+    width: 816px;
+    position: relative;
+    top: 88px;
+    margin: 0 15% 100% 25%;
+}
+
+#text {
+	text-align: center;
+    left: 50px;
+}
+
+#text #textBtn {
+	border: 1px solid lightgray;
+    vertical-align: top;
+    width: 68px;
+    height: 35px;
+    background: none;
+}
+
+#text table {
+	border: 1px solid lightgray;
+	margin: auto;
+  	width: 80%;
+	padding: 10px;
+    color: gray;
+}
+
+#text textarea {
+	border: none;
+	background: none;
+	resize: none;
+	overflow: hidden;
+	text-align: center;
+}
+
+#feed table {
+	border: 1px solid lightgray;
+	width: 100%;
+	border-collapse: collapse;
+}
+
+#feed th, #feed td {
+	border: 1px solid lightgray;
+}
+
+#feed img { 
+	width: 232px; 
+	height: 232px;
+  		margin:20px;
+  		-webkit-box-flex:1;
+}
+
+.box {
+	display:-webkit-box;
+ 		 	-webkit-box-orient: horizontal;
+ 		 	-moz-box-orient: horizontal;
+  	 	-webkit-box-direction: normal;
+       	-ms-flex-direction: row;
+        	flex-direction: row;
+        	-webkit-box-align:center;
+}
+
+#profileText {
+	outline: none;
+}
+
+#profileImg {
+	border-radius: 50%;
+	width: 110px;
+  		height: 110px;
+	cursor: pointer;
+}

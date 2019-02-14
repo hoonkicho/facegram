@@ -1,0 +1,122 @@
+@charset "UTF-8";
+
+body {
+    margin: 0 auto;
+    font-family: Noto Sans KR;
+    position: relative;
+    color: #666666;
+}
+
+a {
+    color: #666666;
+    text-decoration : none;
+}
+
+input {
+	font-family: Noto Sans KR;
+	background : none;
+	color: #666666;
+}
+
+textarea {
+	font-family: Noto Sans KR;
+	color: #666666;
+}	
+
+a:hover { color : cadetblue; }
+
+input:hover { color : cadetblue; }
+
+#log {
+	color: #555555;
+    text-align: right;
+	font-size: 13px;
+	position: fixed;
+	right: 10px;
+	z-index: 1;
+}
+
+#main {
+	border-bottom: 1px solid #CCCCCC;
+	position: fixed;
+	width: 100%;
+	height: 60px;
+	text-align: center;
+	z-index: 100;
+	top: 0;
+	background-color: #fff;
+}
+
+#facegram {
+	margin-bottom: 25px;
+	text-decoration: none;
+	text-align: center;
+	font-size: 35px;
+	color: #CCCCCC;
+	float: left;
+	width: 100%;
+}
+
+#friends {
+	position: fixed;
+	z-index: 5;
+    top: 61px;
+	padding: 3% 8% 100%;
+}
+
+#friends img {
+	width: 35px;
+	height: 35px;
+    border-radius: 50%;
+    vertical-align: middle;
+    margin: 10px;
+}
+
+#friends ul {
+	padding: 0;
+}
+
+#friends li {
+	list-style: none;
+}
+
+#search {
+	position: fixed;
+    top: 94px;
+	padding: 3% 80% 100%;
+    border-right: 1px solid palegoldenrod;
+}
+
+#search input {
+	margin-bottom: 10px;
+    width: 200px;
+    height: 30px;
+    border: none;
+    border-bottom: 1px solid gray;
+    outline: none;
+}
+
+.nav-counter {
+    position:absolute;
+    top: 34px;
+    left: 3px;
+    min-width: 8px;
+    height: 20px;
+    line-height: 20px;
+    margin-top: -11px;
+    padding: 0 6px;
+    font-weight: normal;
+    font-size: small;
+    color: white;
+    text-align: center;
+    text-shadow: 0 1px rgba(0, 0, 0, 0.2);
+    background: #e23442;
+    border-radius: 11px;
+    background-image: -webkit-linear-gradient(top, #e8616c, #dd202f);
+    background-image: -moz-linear-gradient(top, #e8616c, #dd202f);
+    background-image: -o-linear-gradient(top, #e8616c, #dd202f);
+    background-image: linear-gradient(to bottom, #e8616c, #dd202f);
+    -webkit-box-shadow: inset 0 0 1px 1px rgba(255, 255, 255, 0.1), 0 1px rgba(0, 0, 0, 0.12);
+    box-shadow: inset 0 0 1px 1px rgba(255, 255, 255, 0.1), 0 1px rgba(0, 0, 0, 0.12);
+}
+			
